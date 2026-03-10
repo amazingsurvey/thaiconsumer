@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Voice | แชร์ความคิดเห็น สร้างผลิตภัณฑ์</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f9fafb;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* HEADER - MÀU XANH NGỌC */
+        .site-header {
+            background: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            color: #38b2ac;
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-tagline {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: #4a5568;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #38b2ac;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #38b2ac;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #4a5568;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* HERO - MÀU XANH NGỌC */
+        .hero {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(56, 178, 172, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: #38b2ac;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+        }
+        
+        .hero-cta:hover {
+            background: #319795;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 178, 172, 0.4);
+        }
+        
+        /* MAIN CONTENT - MÀU XANH NGỌC */
+        .content-section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            background: #e6fffa;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: #38b2ac;
+            font-size: 2rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* ARTICLE SECTION */
+        .article-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            margin: 3rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .article-image {
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-content h2 {
+            font-size: 1.6rem;
+            color: #2d3748;
+            margin: 2.5rem 0 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #edf2f7;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.8rem;
+            color: #4a5568;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .article-content li:before {
+            content: '✓';
+            color: #38b2ac;
+            font-weight: bold;
+            position: absolute;
+            left: -1.5rem;
+        }
+        
+        /* CTA BOX - MÀU VÀNG */
+        .cta-box {
+            background: linear-gradient(135deg, #fefcbf 0%, #faf089 100%);
+            border: 2px solid #f6e05e;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box:before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(236, 201, 75, 0.1);
+            border-radius: 50%;
+        }
+        
+        .cta-title {
+            font-size: 1.8rem;
+            color: #975a16;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-text {
+            color: #744210;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ecc94b;
+            color: #744210;
+            padding: 16px 42px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(236, 201, 75, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            background: #d69e2e;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(236, 201, 75, 0.4);
+        }
+        
+        /* TESTIMONIALS - MÀU XANH NGỌC NHẠT */
+        .testimonial-section {
+            background: #e6fffa;
+            padding: 4rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #38b2ac;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .author-info p {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        /* FOOTER - MÀU XANH NGỌC ĐẬM */
+        .site-footer {
+            background: #234e52;
+            color: #cbd5e0;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-title {
+            color: #ecc94b;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a:hover {
+            color: #faf089;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #38b2ac;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        /* RESPONSIVE - GIỮ NGUYÊN */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                padding: 3.5rem 0;
+            }
+            
+            .article-section {
+                padding: 2rem;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-box {
+                padding: 2rem;
+            }
+            
+            .testimonial-section {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button, .hero-cta {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">Consumer Voice</div>
+                        <div class="logo-tagline">เสียงของคุณสร้างผลิตภัณฑ์ในอนาคต</div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="nav-menu" id="navMenu">
+                    <a href="#" class="nav-link">หน้าแรก</a>
+                    <a href="#" class="nav-link">วิธีการ</a>
+                    <a href="#" class="nav-link">หัวข้อ</a>
+                    <a href="#" class="nav-link">ชุมชน</a>
+                    <a href="#" class="nav-link">เกี่ยวกับ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+        <h1 class="hero-title">ความคิดเห็นของคุณมีความสำคัญต่อแบรนด์ทั่วโลก</h1>
+        <p class="hero-subtitle">ร่วมเป็นส่วนหนึ่งกับผู้บริโภคหลายพันคนที่แบ่งปันประสบการณ์และความชอบเพื่อช่วยให้บริษัทสร้างผลิตภัณฑ์และบริการที่ดีขึ้น</p>
+        
+  <a href="#" 
+   onclick="openHeroOffer()" 
+   class="hero-cta">
+   <i class="fas fa-microphone-alt"></i> แชร์ความคิดเห็นของคุณ
+</a>
+
+<script>
+function openHeroOffer() {
+    // Tạo CLICK_ID random
+    const clickId = 'hero_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    // URL với CLICK_ID mới
+    const offerUrl = `https://134l.com/link?z=10706077&var=amazingsurvey_github_io_bangkokvoice.com&ymid=${encodeURIComponent(clickId)}`;
+    
+    // Chuyển trang trong cùng tab
+    window.location.href = offerUrl;
+    return false;
+}
+</script>
+    </div>
+</section>
+
+    <!-- FEATURES -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">ทำไมต้องแชร์ความคิดเห็นของผู้บริโภค?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="feature-title">ให้เสียงของคุณได้รับการรับฟัง</h3>
+                    <p>มีอิทธิพลโดยตรงต่อการพัฒนาผลิตภัณฑ์ แคมเปญโฆษณา และการปรับปรุงบริการจากแบรนด์ชั้นนำ</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">ค้นพบผลิตภัณฑ์ใหม่</h3>
+                    <p>เข้าถึงแนวคิดผลิตภัณฑ์ก่อนใคร และให้ข้อเสนอแนะก่อนที่สินค้าจะวางตลาด</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">ร่วมเป็นส่วนหนึ่งของชุมชน</h3>
+                    <p>เชื่อมต่อกับผู้บริโภคที่มีแนวคิดเดียวกัน และพูดคุยเกี่ยวกับเทรนด์ตลาดและประสบการณ์การช้อปปิ้ง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN ARTICLE -->
+    <section class="content-section">
+        <div class="container">
+            <div class="article-section">
+                <div class="article-header">
+                    <h1 class="article-title">ความคิดเห็นของผู้บริโภคกำลังเปลี่ยนแปลงตลาดอย่างไร</h1>
+                    <div class="article-meta">
+                        <div class="meta-item">
+                            <i class="far fa-calendar"></i> 28 มีนาคม 2024
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i> อ่าน 6 นาที
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-tag"></i> การวิจัยตลาด
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="กลุ่มสนทนาเกี่ยวกับผลิตภัณฑ์">
+                </div>
+                
+                <div class="article-content">
+                    <p>ในตลาดที่มีการแข่งขันสูงในปัจจุบัน บริษัทต่างๆ หันมาใช้ความคิดเห็นของผู้บริโภคโดยตรงเพื่อชี้นำการตัดสินใจ ตั้งแต่การออกแบบผลิตภัณฑ์ไปจนถึงกลยุทธ์การตลาด ความคิดเห็นในชีวิตประจำวันของคุณกำลังกลายเป็นข้อมูลที่มีค่าที่กำหนดผลิตภัณฑ์และบริการที่คุณใช้</p>
+                    
+                    <h2>วิวัฒนาการของการวิจัยตลาด</h2>
+                    <p>ยุคที่บริษัทพัฒนาผลิตภัณฑ์โดยอาศัยสมมติฐานภายในเท่านั้นได้ผ่านพ้นไปแล้ว ธุรกิจสมัยใหม่ตระหนักดีว่าการเข้าใจพฤติกรรมและความชอบของผู้บริโภคที่แท้จริงเป็นกุญแจสู่ความสำเร็จ การเปลี่ยนแปลงนี้สร้างโอกาสมากมายให้ผู้คนทั่วไปมีส่วนร่วมในการกำหนดทิศทางของตลาด</p>
+                    
+                    <p>การวิจัยตลาดได้พัฒนาจากการสนทนากลุ่มแบบดั้งเดิมไปสู่แพลตฟอร์มดิจิทัลที่หลากหลาย ซึ่งช่วยให้การมีส่วนร่วมกว้างขึ้นและหลากหลายมากขึ้น การทำให้ความคิดเห็นของผู้บริโภคเป็นประชาธิปไตยหมายความว่าเสียงของคุณสามารถได้ยินได้ไม่ว่าคุณจะอยู่ที่ไหนหรือมีภูมิหลังอย่างไร</p>
+                    
+                    <h2>การมีส่วนร่วมของคุณสร้างความแตกต่าง</h2>
+                    <p>เมื่อคุณแบ่งปันความคิดเห็นผ่านแพลตฟอร์มข้อมูลเชิงลึกของผู้บริโภคที่ถูกต้อง คุณมีส่วนช่วยใน:</p>
+                    
+                    <ul>
+                        <li><strong>การออกแบบผลิตภัณฑ์ที่ดีขึ้น:</strong> ข้อเสนอแนะของคุณเกี่ยวกับการใช้งาน คุณสมบัติ และความสวยงาม ช่วยให้บริษัทสร้างผลิตภัณฑ์ที่ตรงตามความต้องการของผู้บริโภคอย่างแท้จริง</li>
+                        <li><strong>ประสบการณ์ลูกค้าที่ดีขึ้น:</strong> ข้อมูลเชิงลึกของคุณเกี่ยวกับการเดินทางช้อปปิ้งและการโต้ตอบบริการช่วยให้ธุรกิจปรับปรุงกระบวนการ</li>
+                        <li><strong>การโฆษณาที่เกี่ยวข้องมากขึ้น:</strong> พฤติกรรมการบริโภคสื่อและการรับรู้แบรนด์ของคุณช่วยสร้างโฆษณาที่ตรงใจมากกว่าการรบกวน</li>
+                        <li><strong>แนวทางปฏิบัติทางธุรกิจที่ยั่งยืน:</strong> คุณค่าและความกังวลของคุณเกี่ยวกับปัญหาสิ่งแวดล้อมและสังคมมีอิทธิพลต่อโครงการความรับผิดชอบขององค์กร</li>
+                    </ul>
+                    
+                    <!-- CTA BOX - VỊ TRÍ CHÍNH CHÈN LINK  -->
+                    <div class="cta-box" id="participate">
+                        <h2 class="cta-title">พร้อมที่จะแชร์มุมมองของคุณหรือยัง?</h2>
+                        <p class="cta-text">
+                            เราได้ร่วมมือกับแพลตฟอร์มข้อมูลเชิงลึกผู้บริโภคที่เชื่อถือได้ ซึ่งเชื่อมต่อผู้คนทั่วไปกับโอกาสในการวิจัยตลาด
+                            แพลตฟอร์มเหล่านี้จับคู่ข้อมูลประชากรและความสนใจของคุณกับการศึกษาที่เกี่ยวข้องจากแบรนด์ที่ต้องการข้อเสนอแนะจากผู้บริโภค
+                        </p>
+                        <!-- THAY THẾ LINK Ở ĐÂY -->
+                        <a href="https://onykp.com/link?z=10481650&var=worker1987_github_io_consumer-feedback" 
+                           class="cta-button">
+                            <i class="fas fa-pencil-alt"></i> เข้าร่วมทีมวิจัยผู้บริโภค
+                        </a>
+                        <p style="margin-top: 1rem; color: #744210; font-size: 0.9rem;">
+                            <i class="fas fa-shield-alt"></i> ความเป็นส่วนตัวของคุณได้รับการปกป้อง - ทุกแพลตฟอร์มปฏิบัติตามแนวทางการปกป้องข้อมูลอย่างเคร่งครัด
+                        </p>
+                    </div>
+                    
+                    <h2>เริ่มต้นกับการวิจัยผู้บริโภค</h2>
+                    <p>การมีส่วนร่วมในการวิจัยตลาดเป็นเรื่องง่าย หลังจากเข้าร่วมแพลตฟอร์มที่มีชื่อเสียง คุณจะกรอกโปรไฟล์ที่ระบุข้อมูลประชากร ความสนใจ และพฤติกรรมการบริโภคของคุณ ข้อมูลนี้ช่วยจับคู่คุณกับโอกาสในการวิจัยที่เกี่ยวข้อง</p>
+                    
+                    <p>โอกาสอาจรวมถึงแบบสำรวจสั้นๆ การทดสอบผลิตภัณฑ์ การสนทนากลุ่ม หรือการศึกษาตามพฤติกรรม การมีส่วนร่วมเป็นไปโดยสมัครใจเสมอ และคุณสามารถเลือกการศึกษาที่สอดคล้องกับความสนใจและเวลาของคุณ</p>
+                    
+                    <p>ผู้เข้าร่วมที่ประสบความสำเร็จมากที่สุดคือผู้ที่ให้ข้อเสนอแนะที่ซื่อสัตย์และรอบคอบ จำไว้ว่าไม่มีคำตอบที่ถูกหรือผิดในการวิจัยตลาด—ความคิดเห็นที่แท้จริงของคุณคือสิ่งที่แบรนด์ต้องการฟังอย่างแท้จริง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="content-section">
+        <div class="container">
+            <div class="testimonial-section">
+                <h2 class="section-title">ผู้เข้าร่วมพูดว่าอย่างไร</h2>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"ฉันได้แชร์ความคิดเห็นเกี่ยวกับผลิตภัณฑ์ในบ้านมาสองปีแล้ว รู้สึกดีที่รู้ว่าข้อเสนอแนะของฉันมีอิทธิพลต่อสิ่งที่วางขายบนชั้นวางจริงๆ"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ส</div>
+                            <div class="author-info">
+                                <h4>สมหญิง ร.</h4>
+                                <p>ผู้เข้าร่วมตั้งแต่ 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"ในฐานะคนชอบเทคโนโลยี ฉันชอบที่ได้ทดสอบแนวคิดแอปใหม่ก่อนเปิดตัว คำแนะนำของฉันถูกนำไปใช้ในผลิตภัณฑ์หลายอย่างที่ฉันใช้ทุกวัน"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">อ</div>
+                            <div class="author-info">
+                                <h4>อรรถพล จ.</h4>
+                                <p>ผู้ให้ข้อเสนอแนะด้านเทคโนโลยี</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"แพลตฟอร์มจับคู่ฉันกับการศึกษาเกี่ยวกับบรรจุภัณฑ์ที่ยั่งยืน—หัวข้อที่ฉันสนใจ การได้มีส่วนร่วมในการแก้ปัญหาสิ่งแวดล้อมผ่านการเลือกของผู้บริโภคเป็นสิ่งที่มีคุณค่า"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ป</div>
+                            <div class="author-info">
+                                <h4>ปานระพี ล.</h4>
+                                <p>ผู้บริโภคใส่ใจสิ่งแวดล้อม</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">Consumer Voice</h3>
+                    <p>เชื่อมต่อผู้บริโภคทั่วไปกับแบรนด์ที่ให้คุณค่ากับความคิดเห็นของพวกเขา ร่วมกันเราสร้างผลิตภัณฑ์และบริการที่ดีขึ้นสำหรับทุกคน</p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">ลิงก์ด่วน</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">วิธีการทำงาน</a></li>
+                        <li><a href="#">หัวข้อวิจัย</a></li>
+                        <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+                        <li><a href="#">คำถามที่พบบ่อย</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">ติดต่อ</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> thailand@consumervoice.org</li>
+                        <li><i class="fas fa-shield-alt"></i> ปกป้องความเป็นส่วนตัว</li>
+                        <li><i class="fas fa-user-check"></i> เฉพาะแพลตฟอร์มที่ได้รับการยืนยัน</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 Consumer Voice. เนื้อหาทั้งหมดมีวัตถุประสงค์เพื่อให้ข้อมูล เราติดต่อผู้บริโภคกับโอกาสวิจัยตลาดที่เชื่อถือได้</p>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
